@@ -1,6 +1,13 @@
 import React from 'react';
 import {Component} from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    Image,
+    StyleSheet,
+    ImageBackground,
+} from 'react-native';
 
 var HAMBURGER = 1;
 var MUSIC = 2;
@@ -47,7 +54,11 @@ class Content extends Component {
             ) : (
                 <Image></Image>
             );
-        return <View style={this.props.style}>{imageComponent}</View>;
+        return (
+            <View style={this.props.style}>
+                <View style={styles.weatherLeft}>{imageComponent}</View>
+            </View>
+        );
     }
 }
 
@@ -82,7 +93,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <>
+            <View style={{flex: 1}}>
                 <Image
                     source={require('./resource/background.jpg')}
                     style={styles.backgroundJPG}></Image>
@@ -99,7 +110,7 @@ export default class App extends Component {
                 </View>
                 <Content style={styles.mainContent} btnType={SUNNY}></Content>
                 <Content style={styles.blank}></Content>
-            </>
+            </View>
         );
     }
 }
@@ -137,10 +148,14 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
+    weatherLeft: {
+        flex: 0.8,
+    },
     weatherIcon: {
         flex: 1,
         width: 110,
         height: 110,
         resizeMode: 'contain',
+        marginLeft: 20,
     },
 });
