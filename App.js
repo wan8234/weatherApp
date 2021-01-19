@@ -54,9 +54,34 @@ class Content extends Component {
             ) : (
                 <Image></Image>
             );
+        var temperature = 13;
         return (
             <View style={this.props.style}>
-                <View style={styles.weatherLeft}>{imageComponent}</View>
+                <View style={styles.weatherLeft}>
+                    {imageComponent}
+                    <Text style={styles.temper}>{temperature} ℃</Text>
+                </View>
+                <View style={styles.weatherRight}>
+                    <View
+                        style={{
+                            flex: 0.3,
+                            flexDirection: 'row',
+                            marginBottom: -30,
+                        }}>
+                        <Image
+                            style={styles.mapIcon}
+                            source={require('./resource/MapPin.png')}
+                        />
+                        <Text style={styles.normalText}>Mykonos, Greece</Text>
+                    </View>
+                    <View style={{flex: 0.5}}>
+                        <Text style={styles.normalText}>Sunny</Text>
+                        <Text style={styles.normalText}>15 ℃ / 10 ℃</Text>
+                        <Text style={styles.normalText}>
+                            Good day for jogging
+                        </Text>
+                    </View>
+                </View>
             </View>
         );
     }
@@ -109,7 +134,7 @@ export default class App extends Component {
                     />
                 </View>
                 <Content style={styles.mainContent} btnType={SUNNY}></Content>
-                <Content style={styles.blank}></Content>
+                <View style={styles.blank}></View>
             </View>
         );
     }
@@ -120,7 +145,7 @@ const styles = StyleSheet.create({
         flex: 0.4,
         alignItems: 'flex-start',
         justifyContent: 'space-around',
-        backgroundColor: '#AF1423',
+        // backgroundColor: '#AF1423',
         flexDirection: 'row',
         paddingTop: 10,
     },
@@ -131,12 +156,13 @@ const styles = StyleSheet.create({
     },
     mainContent: {
         flex: 2,
+        flexDirection: 'row',
         marginLeft: 20,
         marginRight: 20,
         marginTop: 10,
         marginBottom: 10,
         backgroundColor: '#BEEBE9',
-        opacity: 0.5,
+        // opacity: 0.5,
         borderRadius: 20,
     },
     blank: {
@@ -153,9 +179,32 @@ const styles = StyleSheet.create({
     },
     weatherIcon: {
         flex: 1,
-        width: 110,
-        height: 110,
+        width: 100,
+        height: 10,
         resizeMode: 'contain',
-        marginLeft: 20,
+        marginLeft: 27,
+    },
+    temper: {
+        fontSize: 35,
+        marginLeft: 33,
+        marginBottom: 10,
+    },
+    weatherRight: {
+        flex: 1,
+        marginTop: 10,
+        marginRight: 12,
+        justifyContent: 'center',
+    },
+    mapIcon: {
+        flex: 0.2,
+        height: 30,
+        resizeMode: 'contain',
+        marginLeft: 8,
+    },
+    normalText: {
+        flex: 1,
+        fontSize: 18,
+        textAlign: 'right',
+        marginRight: 10,
     },
 });
