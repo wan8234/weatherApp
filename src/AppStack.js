@@ -75,19 +75,12 @@ class Content extends Component {
                     <Text style={styles.temper}>{temperature} ℃</Text>
                 </View>
                 <View style={styles.weatherRight}>
-                    <View
-                        style={{
-                            flex: 0.3,
-                            flexDirection: 'row',
-                            marginTop: 15,
-                        }}>
-                        <Image
-                            style={styles.mapIcon}
-                            source={require('../resource/MapPin.png')}
-                        />
+                    <Image
+                        style={styles.mapIcon}
+                        source={require('../resource/MapPin.png')}
+                    />
+                    <View style={{flex: 1}}>
                         <Text style={styles.normalText}>Mykonos, Greece</Text>
-                    </View>
-                    <View style={{flex: 0.9, marginBottom: 15}}>
                         <Text style={styles.normalText}>Sunny</Text>
                         <Text style={styles.normalText}>15 ℃ / 10 ℃</Text>
                         <Text style={styles.normalText}>
@@ -176,7 +169,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         backgroundColor: '#BEEBE9',
-        // opacity: 0.5,
         borderRadius: 20,
     },
     blank: {
@@ -192,31 +184,30 @@ const styles = StyleSheet.create({
         flex: 0.8,
     },
     weatherIcon: {
-        flex: 1,
+        top: 20,
+        left: 25,
         width: 100,
-        height: 10,
+        height: 100,
         resizeMode: 'contain',
-        marginLeft: 27,
     },
     temper: {
         fontSize: 35,
-        marginLeft: 33,
-        marginBottom: 10,
+        top: 20,
+        left: 35,
     },
     weatherRight: {
         flex: 1,
-        marginTop: 10,
         marginRight: 12,
-        justifyContent: 'center',
     },
     mapIcon: {
-        flex: 0.2,
+        top: 30,
         height: 30,
+        width: 30,
         resizeMode: 'contain',
-        marginLeft: 8,
+        marginLeft: 7,
     },
     normalText: {
-        flex: 1,
+        flex: 0.22,
         fontSize: 18,
         textAlign: 'right',
         marginRight: 10,
