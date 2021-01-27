@@ -79,13 +79,23 @@ class Content extends Component {
                         style={styles.mapIcon}
                         source={require('../resource/MapPin.png')}
                     />
-                    <View style={{flex: 1}}>
-                        <Text style={styles.normalText}>Mykonos, Greece</Text>
-                        <Text style={styles.normalText}>Sunny</Text>
-                        <Text style={styles.normalText}>15 ℃ / 10 ℃</Text>
-                        <Text style={styles.normalText}>
-                            Good day for jogging
-                        </Text>
+                    <View style={{flex: 0.9}}>
+                        <View style={{flex: 1}}>
+                            <Text style={styles.normalText}>
+                                Mykonos, Greece
+                            </Text>
+                        </View>
+                        <View style={{flex: 1}}>
+                            <Text style={styles.normalText}>Sunny</Text>
+                        </View>
+                        <View style={{flex: 1}}>
+                            <Text style={styles.normalText}>15 ℃ / 10 ℃</Text>
+                        </View>
+                        <View style={{flex: 1}}>
+                            <Text style={styles.normalText}>
+                                Good day for jogging
+                            </Text>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -198,6 +208,7 @@ const styles = StyleSheet.create({
     weatherRight: {
         flex: 1,
         marginRight: 12,
+        marginBottom: 7,
     },
     mapIcon: {
         top: 30,
@@ -207,7 +218,6 @@ const styles = StyleSheet.create({
         marginLeft: 7,
     },
     normalText: {
-        flex: 0.22,
         fontSize: 18,
         textAlign: 'right',
         marginRight: 10,
