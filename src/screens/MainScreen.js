@@ -4,6 +4,7 @@ import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 // import {createStackNavigator} from 'react-navigation-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import MenuDrawer from 'react-native-side-drawer';
 
 const Stack = createStackNavigator();
 
@@ -46,7 +47,9 @@ class ImageButton extends Component {
             );
         return (
             <View>
-                <TouchableOpacity>{imageComponent}</TouchableOpacity>
+                <TouchableOpacity onPress={() => sideMenu()}>
+                    {imageComponent}
+                </TouchableOpacity>
             </View>
         );
     }
@@ -128,6 +131,14 @@ class Content extends Component {
 //   }
 // }
 
+sideMenu = () => {
+    return (
+        <TouchableOpacity>
+            <Text>Close</Text>
+        </TouchableOpacity>
+    );
+};
+
 export default class MainScreen extends Component {
     constructor(props) {
         super(props);
@@ -140,10 +151,21 @@ export default class MainScreen extends Component {
                     source={require('../resource/background.jpg')}
                     style={styles.backgroundJPG}></Image>
                 <View style={styles.navbar}>
-                    <ImageButton
-                        style={{width: 25, height: 25, resizeMode: 'contain'}}
-                        btnType={HAMBURGER}
-                    />
+                    <MenuDrawer
+                        drawerContent={sideMenu()}
+                        drawerPercentage={70}
+                        animationTime={250}
+                        overlay={true}>
+                        <ImageButton
+                            style={{
+                                width: 25,
+                                height: 25,
+                                resizeMode: 'contain',
+                            }}
+                            btnType={HAMBURGER}
+                        />
+                    </MenuDrawer>
+
                     <Text style={styles.navDate}>October 20th</Text>
                     <ImageButton
                         style={{width: 28, height: 28, resizeMode: 'contain'}}

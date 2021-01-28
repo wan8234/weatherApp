@@ -4,6 +4,7 @@ import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 // import {createStackNavigator} from 'react-navigation-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import MenuDrawer from 'react-native-side-drawer';
 
 const Stack = createStackNavigator();
 
@@ -46,7 +47,9 @@ class ImageButton extends Component {
             );
         return (
             <View>
-                <TouchableOpacity>{imageComponent}</TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.toggleOpen}>
+                    {imageComponent}
+                </TouchableOpacity>
             </View>
         );
     }
@@ -131,8 +134,20 @@ class Content extends Component {
 export default class AppStack extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            open: false,
+        };
     }
-
+    toggleOpen = () => {
+        this.setState({open: !this.state.open});
+    };
+    drawerContent = () => {
+        return (
+            <TouchableOpacity onPress={this.toggleOpen}>
+                <Text>Close</Text>
+            </TouchableOpacity>
+        );
+    };
     render() {
         return (
             <View style={{flex: 1}}>
@@ -140,15 +155,37 @@ export default class AppStack extends Component {
                     source={require('../resource/background.jpg')}
                     style={styles.backgroundJPG}></Image>
                 <View style={styles.navbar}>
-                    <ImageButton
-                        style={{width: 25, height: 25, resizeMode: 'contain'}}
-                        btnType={HAMBURGER}
-                    />
-                    <Text style={styles.navDate}>October 20th</Text>
-                    <ImageButton
-                        style={{width: 28, height: 28, resizeMode: 'contain'}}
-                        btnType={MUSIC}
-                    />
+                    <View style={{flex: 1}}>
+                        <MenuDrawer
+                            open={this.state.open}
+                            drawerContent={this.drawerContent()}
+                            drawerPercentage={70}
+                            animationTime={250}
+                            overlay={true}>
+                            <ImageButton
+                                style={{
+                                    width: 25,
+                                    height: 25,
+                                    resizeMode: 'contain',
+                                }}
+                                btnType={HAMBURGER}
+                                onPress={this.toggleOpen}
+                            />
+                        </MenuDrawer>
+                    </View>
+                    <View style={{flex: 2}}>
+                        <Text style={styles.navDate}>October 20th</Text>
+                    </View>
+                    <View style={{flex: 1}}>
+                        <ImageButton
+                            style={{
+                                width: 28,
+                                height: 28,
+                                resizeMode: 'contain',
+                            }}
+                            btnType={MUSIC}
+                        />
+                    </View>
                 </View>
                 <Content style={styles.mainContent} btnType={SUNNY}></Content>
                 <View style={styles.blank}></View>
@@ -161,14 +198,15 @@ const styles = StyleSheet.create({
     navbar: {
         flex: 0.4,
         alignItems: 'flex-start',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         // backgroundColor: '#AF1423',
         flexDirection: 'row',
         paddingTop: 10,
     },
     navDate: {
-        paddingRight: 50,
-        paddingLeft: 50,
+        // paddingRight: 50,
+        // paddingLeft: 50,
+        // marginLeft: 30,
         fontSize: 20,
     },
     mainContent: {
