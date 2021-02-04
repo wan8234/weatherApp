@@ -145,6 +145,7 @@ export default class AppStack extends Component {
                     drawerContent={this.drawerContent()}
                     drawerPercentage={85}
                     animationTime={200}
+                    opacity={0.0}
                     overlay={true}></MenuDrawer>
                 <View style={styles.navbar}>
                     <ImageButton

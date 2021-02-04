@@ -6,6 +6,7 @@ import {
     Image,
     StyleSheet,
     FlatList,
+    ScrollView,
 } from 'react-native';
 // import Photo from './Photo';
 
@@ -86,7 +87,46 @@ class DrawerScreen extends Component {
                         style={styles.MusicLogo}
                         source={require('../../resource/MusicNotes.png')}
                     />
-                    <Text style={styles.MusicText}>Music</Text>
+                    <View style={styles.MusicContent}>
+                        <Text style={styles.MusicText}>Music</Text>
+                        <ScrollView>
+                            <View>
+                                <Text style={styles.MusicWeatherText}>
+                                    Sunny
+                                </Text>
+                            </View>
+                            <View style={styles.MusicList}>
+                                <Image
+                                    style={styles.MusicListCircle}
+                                    source={require('../../resource/Ellipse.png')}
+                                />
+                                <Text style={styles.MusicListText}>
+                                    Seorak - Thanos
+                                </Text>
+                                <TouchableOpacity>
+                                    <Image
+                                        style={styles.MusicListCross}
+                                        source={require('../../resource/X.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View>
+                                <TouchableOpacity style={styles.MusicList}>
+                                    <Image
+                                        style={styles.MusicListPlus}
+                                        source={require('../../resource/Plus.png')}
+                                    />
+                                    <Text
+                                        style={
+                                            (styles.MusicListText,
+                                            {color: '#A0A0A0'})
+                                        }>
+                                        Add...
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        </ScrollView>
+                    </View>
                 </View>
                 <View style={styles.Maker}>
                     <Text style={styles.Maker}>ⓒ Kkook Coporation</Text>
@@ -212,7 +252,40 @@ const styles = StyleSheet.create({
     },
     MusicText: {
         fontSize: 18,
-        marginLeft: 15,
+    },
+    MusicContent: {
+        marginLeft: 14,
+    },
+    MusicWeatherText: {
+        marginTop: 7,
+        fontSize: 18,
+    },
+    MusicList: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    MusicListCircle: {
+        height: 4,
+        width: 4,
+        resizeMode: 'contain',
+        marginRight: 5,
+        marginLeft: 3,
+    },
+    MusicListText: {
+        fontSize: 15,
+        paddingBottom: 3,
+        marginRight: 3,
+    },
+    MusicListCross: {
+        height: 9,
+        width: 9,
+        resizeMode: 'contain',
+    },
+    MusicListPlus: {
+        height: 10,
+        width: 10,
+        resizeMode: 'contain',
+        marginRight: 2,
     },
     Maker: {
         flex: 1,
