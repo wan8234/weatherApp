@@ -1,10 +1,19 @@
-import React from 'react';
-import {Component} from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import React, {Component} from 'react';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    Image,
+    StyleSheet,
+    Animated,
+} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import MenuDrawer from 'react-native-side-drawer';
 import DrawerScreen from './screens/DrawerScreen';
+import {RectButton} from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import {DrawerNavigator, SafeAreaView} from 'react-navigation';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 const Stack = createStackNavigator();
 
@@ -121,6 +130,11 @@ export default class AppStack extends Component {
             open: false,
         };
     }
+    _onSwipeLeft = (gestureState) => {
+        this.setState({open: !this.state.open});
+        console.log(this.state.open);
+    };
+
     toggleOpen = () => {
         this.setState({open: !this.state.open});
     };
@@ -135,44 +149,51 @@ export default class AppStack extends Component {
     };
     render() {
         return (
-            <View style={{flex: 1}}>
-                <Image
-                    source={require('../resource/background.jpg')}
-                    style={styles.backgroundJPG}
-                />
-                <MenuDrawer
-                    open={this.state.open}
-                    drawerContent={this.drawerContent()}
-                    drawerPercentage={85}
-                    animationTime={200}
-                    opacity={0.0}
-                    overlay={true}></MenuDrawer>
-                <View style={styles.navbar}>
-                    <ImageButton
-                        style={{
-                            width: 25,
-                            height: 25,
-                            resizeMode: 'contain',
-                        }}
-                        btnType={HAMBURGER}
-                        onPress={this.toggleOpen}
+            <GestureRecognizer
+                style={{flex: 1}}
+                onSwipeLeft={this._onSwipeLeft}>
+                <View style={{flex: 1}}>
+                    <Image
+                        source={require('../resource/background.jpg')}
+                        style={styles.backgroundJPG}
                     />
-                    <Text style={styles.navDate}>October 20th</Text>
-                    <ImageButton
-                        style={{
-                            width: 28,
-                            height: 28,
-                            resizeMode: 'contain',
-                        }}
-                        btnType={MUSIC}
-                    />
+                    <View style={styles.navbar}>
+                        <ImageButton
+                            style={{
+                                width: 25,
+                                height: 25,
+                                resizeMode: 'contain',
+                            }}
+                            btnType={HAMBURGER}
+                            onPress={this.toggleOpen}
+                        />
+                        <Text style={styles.navDate}>October 20th</Text>
+                        <ImageButton
+                            style={{
+                                width: 28,
+                                height: 28,
+                                resizeMode: 'contain',
+                            }}
+                            btnType={MUSIC}
+                        />
+                    </View>
+                    <Content
+                        style={styles.mainContent}
+                        btnType={SUNNY}></Content>
+                    <View style={styles.blank}></View>
                 </View>
-                <Content style={styles.mainContent} btnType={SUNNY}></Content>
-                <View style={styles.blank}></View>
-            </View>
+            </GestureRecognizer>
         );
     }
 }
+
+/* <MenuDrawer
+open={this.state.open}
+drawerContent={this.drawerContent()}
+drawerPercentage={85}
+animationTime={200}
+opacity={0.0}
+overlay={true}></MenuDrawer> */
 
 const styles = StyleSheet.create({
     navbar: {
